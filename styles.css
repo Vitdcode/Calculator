@@ -1,0 +1,43 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mainContainer {
+    display: flex;
+    height: 800px;
+    width: 400px;
+    background-color: rgb(33, 31, 35);
+    justify-content: center;
+    border-radius: 10px;
+}
+
+#inputContainer {
+    
+    width: 400px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    flex: 1 0 auto; 
+    
+   
+}
+
+#inputField {
+    margin: 0;
+    padding: 0;
+    width: 390px;
+    outline-width: 0;
+    font-size: 50px;
+    text-align: end;
+    font-weight: bold;
+    border-radius: 30px;
+    color:  rgb(46, 46, 46);
+    background-color: rgb(212, 203, 203);
+    border:  solid rgb(52, 52, 52); 
+
+   
+}

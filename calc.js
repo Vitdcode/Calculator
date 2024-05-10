@@ -1,8 +1,5 @@
-let firstNum;
-let secondNum;
-let operator; 
-
-
+const inputField = document.querySelector("input");
+buttonPress();
 
 function add(number1, number2) {
     let sum = 0;
@@ -39,4 +36,14 @@ function operate(number1, operator, number2) {
     }
 }
 
-console.log(operate(4,"/",2));
+
+    function buttonPress() {
+        const buttons = document.querySelectorAll("button");
+            buttons.forEach(button => {
+                button.addEventListener("click", () => {
+                return inputField.value += button.textContent;
+                });
+            })
+     } 
+
+

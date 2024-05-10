@@ -8,10 +8,11 @@ body {
 
 #mainContainer {
     display: flex;
+    flex-direction: column;
     height: 800px;
     width: 400px;
-    background-color: rgb(33, 31, 35);
-    justify-content: center;
+    background-color: rgb(48, 47, 49);
+    justify-content: space-between;
     border-radius: 10px;
 }
 
@@ -21,7 +22,7 @@ body {
     height: 250px;
     display: flex;
     justify-content: center;
-    flex: 1 0 auto; 
+    flex: 0 0 auto; 
     
    
 }
@@ -37,7 +38,43 @@ body {
     border-radius: 30px;
     color:  rgb(46, 46, 46);
     background-color: rgb(212, 203, 203);
-    border:  solid rgb(52, 52, 52); 
-
-   
+    border:  solid rgb(52, 52, 52);
 }
+
+#buttonContainer {
+    height: 510px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 10px;
+
+}
+
+#equals {
+    background-color: rgb(163, 202, 133)
+
+}
+#equals:active {
+    background-color: rgb(102, 126, 83);
+}
+
+button {
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+    background-color: rgb(144, 177, 117);
+    border: solid rgb(144, 177, 117);
+}
+
+button:active {
+    background-color: rgb(102, 126, 83);
+}
+
+#
+

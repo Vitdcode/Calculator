@@ -54,11 +54,14 @@ body {
 }
 
 #equals {
-    background-color: rgb(163, 202, 133)
+    /* background-color: rgb(163, 202, 133) */
+    background-color: rgb(79, 68, 241);
+    
 
 }
 #equals:active {
     background-color: rgb(102, 126, 83);
+    
 }
 
 button {

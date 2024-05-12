@@ -9,85 +9,55 @@ const decimalButton = document.querySelector("#decimal");
 
 
 let input = ""; 
-let operatorButtonsCounter = 0;
+let decimalUsed = false; //flag for tracking decimal presence in the Inputfield
+let operatorisUsedTwice = false; // if any operator is used twice this is set to true and the pair of numbers are evaluated 
 
 buttonPress();
 clearButton();
-operatorClickCounter ();
-evaluate();
-delOneChar();
+deleteButton();
 powerOfTwo();
-decimalSlicer ();
 keyboardEnter ();
-
-
+operatorUsedTwiceEvaluation();
+evaluateEqualsButton();
+preventMultipleDecimals ();
 
 
 function add(number1, number2) {
-    let sum = 0;
-    
-    sum = number1 + number2;
-    return sum;
-}
+    let resultSum = 0;
+    resultSum = number1 + number2;
+    if(resultSum.toString().includes(".")) return inputField.value =  resultSum.toFixed(2);
+        else return  inputField.value = resultSum;
+   
+};
 
 function sub(number1, number2) {
-    let sum = 0;
-    
-    sum = number1 - number2;
-    
-    return sum;
-}
+    let resultSub = 0;
+    resultSub = number1 - number2;
+    if(resultSub.toString().includes(".")) return inputField.value = resultSub.toFixed(2);
+        else return inputField.value = resultSub;
+};
 
 function multiply(number1, number2) {
-    let sum = 0;
-    
-    sum = number1 * number2;
-    return sum;
-}
+    let resultMult = 0;
+    resultMult = number1 * number2;
+    if(resultMult.toString().includes(".")) return inputField.value = resultMult.toFixed(2);
+        else return inputField.value = resultMult;
+};
 
 function divide(number1, number2) {
-    let sum = 0;
-   
-    if (number1 === 0 || number2 === 0) return inputField.value = "ERROR";
-     sum = number1 / number2;
-    if(sum.toString().includes(".")) return sum.toFixed(2);
-        else return sum;
-     
-}
+    let resultDiv = 0;
+    if (number1 === 0 || number2 === 0) return inputField.value = "ERROR"; 
+    resultDiv = number1 / number2;
+    if(resultDiv.toString().includes(".")) return inputField.value = resultDiv.toFixed(2);
+        else return inputField.value = resultDiv;
+};
 
-function decimalSlicer () {
-    let decimalCounter = 0;
-    decimalButton.addEventListener("click", () => {
-        decimalCounter++;
-        console.log(decimalCounter);
-            if(decimalCounter>=2)  {
-              inputField.value = inputField.value.slice(0, -1);
-              return decimalCounter = 1;
-            }
-    })
-    operatorButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        return decimalCounter = 0;
-    })
-})
-}
-
-
-
-function operate(number1, operator, number2) {
-   
-         if (operator === "+") {
-            return inputField.value = add(number1, number2);
-         } else if (operator === "-") {
-             return inputField.value = sub(number1, number2);
-         } else if (operator === "*") {
-             return inputField.value = multiply(number1, number2);
-         } else if (operator === "/") {
-             return inputField.value = divide(number1, number2);
-         }
-     
-}
-
+function percent() {
+    let splitArr = [];
+    input = input.replace(/%|=/g, "");
+    splitArr = input.split("*");
+    return inputField.value = Number(((splitArr[0]/100) * splitArr[1]));  
+};
 
 function buttonPress() {
     buttons.forEach(button => {
@@ -96,110 +66,83 @@ function buttonPress() {
             input = inputField.value;
         });
     });
-}
-
-  function operatorClickCounter () {
-    let splitArr =[];
-    let splicedOperator = "";
-    operatorButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            operatorButtonsCounter++;
-            console.log(operatorButtonsCounter);
-                if (operatorButtonsCounter>=2) {
-                    
-                    splicedOperator = input.charAt(input.length-1);
-                    console.log(splicedOperator);
-                    input = input.slice(0, -1);
-                    console.log(input.length);
-
-                    if(input.includes("+")) {
-                        splitArr = input.split("+")
-                        console.log(splitArr);
-                        operate(Number(splitArr[0]), "+", Number(splitArr[1]));
-                    } else if(input.includes("-")) {
-                        splitArr = input.split("-")
-                        operate(Number(splitArr[0]), "-", Number(splitArr[1]));
-                    } else if(input.includes("*")) {
-                        splitArr = input.split("*")
-                        operate(Number(splitArr[0]), "*", Number(splitArr[1]));
-                    } else if(input.includes("/")) {
-                        splitArr = input.split("/")
-                        operate(Number(splitArr[0]), "/", Number(splitArr[1]));
-                    } 
-                    
-                     operatorButtonsCounter = 1; 
-                     inputField.value +=splicedOperator;
-
-                }
-        })
-    })    
-}     
-
-function powerOfTwo() {
-    powerButton.addEventListener("click", () => {
-        input = input.replace("x²", "");
-        console.log(input);
-        input = Number(input);
-        return inputField.value = input*input;
-    })
-}
-
-
+};
 
 function clearButton() {
     acButton.addEventListener("click", () => {
          inputField.value = "";   
          input = [];
-         operatorButtonsCounter = 0;
-    })
-}
+         decimalUsed = false;
+         operatorisUsedTwice = false;
+    });
+};
 
-function delOneChar(){
+function deleteButton(){
     delButton.addEventListener("click", () => {
-       inputField.value = (inputField.value).slice(0, -4);
-    })
+       inputField.value = (inputField.value).slice(0, -4); //slicing the word "del" and one number
+    });
+};
 
-    
-}
-
-function percent() {
-    let splitArr = [];
-    input = input.replace(/%|=/g, "");
-    splitArr = input.split("*");
-    return inputField.value = Number(((splitArr[0]/100) * splitArr[1]));  
-}
+function powerOfTwo() {
+    powerButton.addEventListener("click", () => {
+        input = input.replace("x²", "");
+        return inputField.value = input*input;
+    });
+};
 
 function keyboardEnter () {
     document.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          equalsButton.click();
+        if (event.key === "Enter") return equalsButton.click();
+    });
+};
+
+
+function preventMultipleDecimals () {
+    decimalButton.addEventListener("click", () => {
+        if(decimalUsed) return inputField.value = inputField.value.slice(0, -1);
+        decimalUsed = true;
+    });
+    operatorButtons.forEach(button => button.addEventListener("click", () => decimalUsed = false));
+};
+  
+function operate() {
+    operators = {    
+        "+": (number1, number2) => add(number1, number2),
+        "-": (number1, number2) => sub(number1, number2),
+        "*": (number1, number2) => multiply(number1, number2),
+        "/": (number1, number2) => divide(number1, number2)
         }
-      });
-}
-
-function evaluate() {
-    let splitArr = [];
-    equalsButton.addEventListener("click", () => {
-        operatorButtonsCounter =0;
-        if (input.includes("%")) return percent();
-
-        input = input.slice(0, -1);
-        console.log(input);
-        if(input.includes("+")) {
-            splitArr = input.split("+")
-            console.log(splitArr);
-            operate(Number(splitArr[0]), "+", Number(splitArr[1]));
-        } else if(input.includes("-")) {
-            splitArr = input.split("-")
-            operate(Number(splitArr[0]), "-", Number(splitArr[1]));
-        } else if(input.includes("*")) {
-            splitArr = input.split("*")
-            operate(Number(splitArr[0]), "*", Number(splitArr[1]));
-        } else if(input.includes("/")) {
-            splitArr = input.split("/")
-            operate(Number(splitArr[0]), "/", Number(splitArr[1]));
+        for (let operator in operators) {   
+            if(input.includes(operator)) {
+            const [number1, number2] = input.split(operator).map(Number);
+            operators[operator](number1, number2);
+            }
         } 
-    })   
-}
+  };
+
+function operatorUsedTwiceEvaluation () {
+    let splicedOperator = "";
+    operatorButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            if (operatorisUsedTwice) {
+                splicedOperator = input.charAt(input.length-1); //storing the operator, so it can be added to the InputField later again after the evaluation of the numbers
+                input = input.slice(0, -1);
+                operate(); // calling the operate function to evaluate the pair of numbers
+                operatorisUsedTwice = false;
+                inputField.value +=splicedOperator; 
+            }
+                operatorisUsedTwice = true;
+        });
+    });    
+};     
+
+
+function evaluateEqualsButton() {
+    equalsButton.addEventListener("click", () => {
+        if (input.includes("%")) return percent();
+         input = input.slice(0, -1);
+        operate()
+        operatorisUsedTwice = false;
+    });  
+};
 

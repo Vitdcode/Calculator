@@ -21,13 +21,13 @@ operatorUsedTwiceEvaluation();
 evaluateEqualsButton();
 preventMultipleDecimals ();
 
+//Calculation functions
 
 function add(number1, number2) {
     let resultSum = 0;
     resultSum = number1 + number2;
     if(resultSum.toString().includes(".")) return inputField.value =  resultSum.toFixed(2);
         else return  inputField.value = resultSum;
-   
 };
 
 function sub(number1, number2) {
@@ -59,6 +59,21 @@ function percent() {
     return inputField.value = Number(((splitArr[0]/100) * splitArr[1]));  
 };
 
+function powerOfTwo() {
+    powerButton.addEventListener("click", () => {
+        input = input.replace("x²", "");
+        return inputField.value = input*input;
+    });
+};
+
+
+
+
+
+
+
+//Button functionality functions
+
 function buttonPress() {
     buttons.forEach(button => {
         button.addEventListener("click", () => {
@@ -83,13 +98,6 @@ function deleteButton(){
     });
 };
 
-function powerOfTwo() {
-    powerButton.addEventListener("click", () => {
-        input = input.replace("x²", "");
-        return inputField.value = input*input;
-    });
-};
-
 function keyboardEnter () {
     document.addEventListener("keypress", function(event) {
         if (event.key === "Enter") return equalsButton.click();
@@ -104,7 +112,16 @@ function preventMultipleDecimals () {
     });
     operatorButtons.forEach(button => button.addEventListener("click", () => decimalUsed = false));
 };
-  
+
+
+
+
+
+
+
+
+//Evaluation functions
+
 function operate() {
     operators = {    
         "+": (number1, number2) => add(number1, number2),
